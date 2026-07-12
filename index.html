@@ -239,6 +239,9 @@
             <button @click="generateWeekPlans()" class="inline-flex items-center gap-2 rounded-lg bg-indigo-600 px-6 py-2.5 text-sm font-semibold text-white shadow-md transition-colors hover:bg-indigo-700">
               <span class="text-lg">\u26A1</span> Generate Lesson Plans
             </button>
+            <button @click="generateFullWeek()" class="inline-flex items-center gap-2 rounded-lg bg-emerald-600 px-6 py-2.5 text-sm font-semibold text-white shadow-md transition-colors hover:bg-emerald-700">
+              <span class="text-lg">\u26A1</span> Generate Full Week
+            </button>
             <span class="text-xs text-slate-400" x-text="'From ' + Object.keys(slotsByDay).length + ' day(s) \u00B7 ' + slotsForWeek.length + ' slot(s)'"></span>
             <button @click="exportAllPlans()" class="inline-flex items-center gap-1.5 rounded-lg border bg-white px-3 py-2 text-xs font-medium text-slate-500 shadow-sm transition-colors hover:bg-slate-50">
               <svg class="h-3.5 w-3.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3 16.5v2.25A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75V16.5M16.5 12 12 16.5m0 0L7.5 12m4.5 4.5V3"/></svg>
@@ -251,7 +254,7 @@
         <div x-show="!lessonPlans.length" class="flex flex-col items-center justify-center rounded-xl border-2 border-dashed py-16 text-center text-slate-400">
           <span class="text-3xl mb-3">📋</span>
           <p class="text-sm font-medium">No lesson plans yet</p>
-          <p class="mt-1 text-xs">Select a week, choose a unit, then click Generate Lesson Plans.</p>
+          <p class="mt-1 text-xs">Select a week, then click <strong>Generate Lesson Plans</strong> (single unit) or <strong>Generate Full Week</strong> (all year groups at once).</p>
         </div>
 
         <!-- Clear all -->
@@ -907,6 +910,84 @@ document.addEventListener('alpine:init', () => {
             theme: unit.theme || f.theme,
             topic: unit.topic || unit.title,
             skillArea: [f.skillArea],
+            date: dateStr,
+            weekLabel: this.mingguLabel,
+            daySlot: slot.day,
+            slotTime: slot.startTime + '\u2013' + slot.endTime,
+            duration: this.minutesBetween(slot.startTime, slot.endTime),
+            part: slot.part,
+            learningObjectives: unit.learningObjectives?.length
+              ? unit.learningObjectives
+              : [`By the end of the lesson, pupils will be able to identify key concepts related to ${unit.title}.`],
+            successCriteria: unit.successCriteria?.length
+              ? unit.successCriteria
+              : ['Pupils can identify key vocabulary.', 'Pupils can complete a task with minimal help.'],
+            teachingAids: unit.teachingAids?.length
+              ? unit.teachingAids
+              : ['Whiteboard', 'Worksheets', 'Picture cards'],
+            moralValues: unit.moralValues?.length
+              ? unit.moralValues
+              : ['Cooperation', 'Respect'],
+            cce: unit.cce?.length
+              ? unit.cce
+              : ['Language', 'Creativity and Innovation'],
+            activities: unit.modules
+              ? this.buildActivitiesFromModule(unit, moduleKey)
+              : [
+                  { id: this.generateId(), phase: 'Set Induction', description: 'Engage pupils with a starter activity.', duration: 5, teacherRole: 'Facilitator', studentRole: 'Participant' },
+                  { id: this.generateId(), phase: 'Pre-lesson', description: 'Introduce key vocabulary.', duration: 5, teacherRole: 'Instructor', studentRole: 'Listener' },
+                  { id: this.generateId(), phase: 'Lesson Development', description: 'Main task related to ' + unit.title, duration: Math.max(15, this.minutesBetween(slot.startTime, slot.endTime) - 15), teacherRole: 'Facilitator', studentRole: 'Active learner' },
+                  { id: this.generateId(), phase: 'Post-lesson', description: 'Pupils share their work.', duration: 5, teacherRole: 'Moderator', studentRole: 'Presenter' },
+                  { id: this.generateId(), phase: 'Closure', description: 'Recap and exit ticket.', duration: 5, teacherRole: 'Facilitator', studentRole: 'Reflector' },
+                ],
+            song: unit.songs?.[0] || null,
+            reflection: '',
+            _open: true,
+          }
+          this.lessonPlans = [plan, ...this.lessonPlans]
+        })
+      })
+    },
+
+    bestUnitForYear(yearGroup) {
+      const units = CURRICULUM_DB.units[yearGroup] || []
+      if (!units.length) return null
+      const withModules = units.filter(u => u.modules && Object.keys(u.modules).length)
+      if (withModules.length) return withModules[0]
+      return units[0]
+    },
+
+    generateFullWeek() {
+      const range = this.weekBoundsFor(this.genWeekOffset)
+      const fmt = d => d.toLocaleDateString('en-GB', { day:'2-digit', month:'short', year:'numeric' })
+      const yearUnitMap = {}
+
+      Object.keys(this.slotsByDay).forEach(day => {
+        const slots = this.slotsByDay[day]
+        const slotDate = this.dateForDay(day, range.mon)
+        const dateStr = fmt(slotDate)
+
+        slots.forEach(slot => {
+          if (!yearUnitMap[slot.yearGroup]) {
+            yearUnitMap[slot.yearGroup] = this.bestUnitForYear(slot.yearGroup)
+          }
+          const unit = yearUnitMap[slot.yearGroup]
+          if (!unit) return
+
+          const isPart2 = slot.part === 2
+          const moduleKey = isPart2 ? 'part2' : 'part1'
+          const suffix = isPart2 ? ' (Part 2)' : ' (Part 1)'
+
+          const plan = {
+            id: this.generateId(),
+            title: `Daily Lesson Plan — ${unit.title}${suffix}`,
+            yearGroup: slot.yearGroup,
+            subject: 'English',
+            theme: unit.theme || '',
+            topic: unit.topic || unit.title,
+            skillArea: unit.contentStandards?.length
+              ? [...new Set(unit.contentStandards.map(cs => cs.skillArea))]
+              : ['Listening', 'Speaking', 'Reading', 'Writing'],
             date: dateStr,
             weekLabel: this.mingguLabel,
             daySlot: slot.day,
