@@ -237,10 +237,10 @@
 
           <div class="mt-4 flex flex-wrap items-center gap-3">
             <button @click="generateWeekPlans()" class="inline-flex items-center gap-2 rounded-lg bg-indigo-600 px-6 py-2.5 text-sm font-semibold text-white shadow-md transition-colors hover:bg-indigo-700">
-              <span class="text-lg">\u26A1</span> Generate Lesson Plans
+              <span class="text-lg">&#x26A1;</span> Generate Lesson Plans
             </button>
             <button @click="generateFullWeek()" class="inline-flex items-center gap-2 rounded-lg bg-emerald-600 px-6 py-2.5 text-sm font-semibold text-white shadow-md transition-colors hover:bg-emerald-700">
-              <span class="text-lg">\u26A1</span> Generate Full Week
+              <span class="text-lg">&#x26A1;</span> Generate Full Week
             </button>
             <span class="text-xs text-slate-400" x-text="'From ' + Object.keys(slotsByDay).length + ' day(s) \u00B7 ' + slotsForWeek.length + ' slot(s)'"></span>
             <button @click="exportAllPlans()" class="inline-flex items-center gap-1.5 rounded-lg border bg-white px-3 py-2 text-xs font-medium text-slate-500 shadow-sm transition-colors hover:bg-slate-50">
@@ -1197,16 +1197,16 @@ const CURRICULUM_DB = {
         unitNumber: 1, title: 'At School', topic: 'At School', theme: 'World of Self, Family and Friends',
         contentStandards: [
           { code: '1.2', description: 'Understand meaning in a variety of familiar contexts', skillArea: 'Listening' },
-          { code: '2.1', description: 'Communicate simple information intelligibly', skillArea: 'Speaking' },
-          { code: '3.1', description: 'Recognise words in linear and non-linear texts', skillArea: 'Reading' },
-          { code: '4.1', description: 'Form letters and words in legible print', skillArea: 'Writing' },
+          { code: '1.1', description: 'Recognise and reproduce target language sounds', skillArea: 'Speaking' },
+          { code: '2.1', description: 'Apply phonics knowledge to recognise words', skillArea: 'Reading' },
+          { code: '3.1', description: 'Form letters and words in neat legible print', skillArea: 'Writing' },
         ],
         learningStandards: [
           { code: '1.2.2', description: 'Understand with support specific information and details of very simple phrases and sentences' },
-          { code: '1.2.5', description: 'Understand short supported questions' },
+          { code: '1.2.5', description: 'Understand an increased range of short supported questions' },
           { code: '2.1.5', description: 'Name or describe objects using suitable words from word sets' },
-          { code: '3.1.1', description: 'Identify and recognise the shapes of the letters in the alphabet' },
-          { code: '4.1.2', description: 'Form upper and lower case letters with correct proportions' },
+          { code: '3.1.1', description: 'Form upper and lower case letters with correct proportions' },
+          { code: '4.1.2', description: 'Say words in simple texts, sing simple songs with intelligible pronunciation' },
         ],
         learningObjectives: [
           'At the end of the lesson, pupils will be able to identify and name at least 3 classroom objects correctly.',
@@ -1241,15 +1241,15 @@ const CURRICULUM_DB = {
         unitNumber: 2, title: "Let's Play!", topic: "Let's Play!", theme: 'World of Self, Family and Friends',
         contentStandards: [
           { code: '1.2', description: 'Understand meaning in a variety of familiar contexts', skillArea: 'Listening' },
-          { code: '2.1', description: 'Communicate simple information intelligibly', skillArea: 'Speaking' },
-          { code: '3.2', description: 'Understand a variety of linear and non-linear print and digital texts', skillArea: 'Reading' },
-          { code: '5.1', description: 'Enjoy and appreciate rhymes, poems and songs', skillArea: 'Language Arts' },
+          { code: '1.1', description: 'Recognise and reproduce target language sounds', skillArea: 'Speaking' },
+          { code: '2.2', description: 'Understand a variety of linear and non-linear print and digital texts', skillArea: 'Reading' },
+          { code: '4.1', description: 'Enjoy and appreciate rhymes, poems and songs', skillArea: 'Language Arts' },
         ],
         learningStandards: [
-          { code: '1.2.5', description: 'Understand short supported questions' },
-          { code: '2.1.4', description: 'Ask about and express ability' },
+          { code: '1.2.5', description: 'Understand an increased range of short supported questions' },
+          { code: '2.1.4', description: 'Segment phonemes to spell words' },
           { code: '2.1.5', description: 'Name or describe objects using suitable words from word sets' },
-          { code: '3.2.2', description: 'Understand specific information and details of very simple phrases and sentences' },
+          { code: '3.2.2', description: 'Find out about personal details by asking basic questions' },
           { code: '5.1.2', description: 'Say the words of simple songs, chants, and rhymes' },
         ],
         learningObjectives: [
@@ -1284,11 +1284,11 @@ const CURRICULUM_DB = {
       {
         unitNumber: 3, title: 'My Pet', topic: 'My Pet', theme: 'World of Knowledge',
         contentStandards: [
-          { code: '3.2', description: 'Understand a variety of linear and non-linear texts', skillArea: 'Reading' },
-          { code: '4.2', description: 'Communicate basic information intelligibly', skillArea: 'Writing' },
+          { code: '2.2', description: 'Understand a variety of linear and non-linear print and digital texts', skillArea: 'Reading' },
+          { code: '3.2', description: 'Communicate basic information intelligibly for a range of purposes', skillArea: 'Writing' },
         ],
         learningStandards: [
-          { code: '3.2.2', description: 'Understand specific info of very simple phrases and sentences' },
+          { code: '3.2.2', description: 'Find out about personal details by asking basic questions' },
           { code: '4.2.3', description: 'Express basic likes and dislikes' },
         ],
         learningObjectives: [
@@ -1318,7 +1318,7 @@ const CURRICULUM_DB = {
       {
         unitNumber: 4, title: 'Lunchtime', topic: 'Lunchtime', theme: 'World of Knowledge',
         contentStandards: [
-          { code: '2.1', description: 'Communicate simple information intelligibly', skillArea: 'Speaking' },
+          { code: '1.1', description: 'Recognise and reproduce target language sounds', skillArea: 'Speaking' },
           { code: '1.2', description: 'Understand meaning in a variety of familiar contexts', skillArea: 'Listening' },
         ],
         learningStandards: [
@@ -1366,15 +1366,15 @@ const CURRICULUM_DB = {
         unitNumber: 5, title: 'Free Time', topic: 'Free Time', theme: 'World of Self, Family and Friends',
         contentStandards: [
           { code: '1.2', description: 'Understand meaning in a variety of familiar contexts', skillArea: 'Listening' },
-          { code: '2.1', description: 'Communicate simple information intelligibly', skillArea: 'Speaking' },
-          { code: '3.2', description: 'Understand a variety of linear and non-linear print and digital texts', skillArea: 'Reading' },
-          { code: '4.2', description: 'Communicate basic information intelligibly for a range of purposes', skillArea: 'Writing' },
+          { code: '1.1', description: 'Recognise and reproduce target language sounds', skillArea: 'Speaking' },
+          { code: '2.2', description: 'Understand a variety of linear and non-linear print and digital texts', skillArea: 'Reading' },
+          { code: '3.2', description: 'Communicate basic information intelligibly for a range of purposes', skillArea: 'Writing' },
         ],
         learningStandards: [
           { code: '1.2.1', description: 'Understand with support the main idea of very simple phrases and sentences' },
-          { code: '2.1.1', description: 'Give simple personal details using basic statements' },
+          { code: '2.1.1', description: 'Identify and recognise the shapes of the letters in the alphabet' },
           { code: '2.1.5', description: 'Name or describe objects using suitable words from word sets' },
-          { code: '3.2.2', description: 'Understand specific information and details of very simple phrases and sentences' },
+          { code: '3.2.2', description: 'Find out about personal details by asking basic questions' },
           { code: '4.2.4', description: 'Name or describe objects using suitable words from word sets' },
         ],
         learningObjectives: [
@@ -1406,14 +1406,14 @@ const CURRICULUM_DB = {
         unitNumber: 6, title: 'The Old House', topic: 'The Old House', theme: 'World of Stories',
         contentStandards: [
           { code: '1.2', description: 'Understand meaning in a variety of familiar contexts', skillArea: 'Listening' },
-          { code: '2.1', description: 'Communicate simple information intelligibly', skillArea: 'Speaking' },
-          { code: '3.2', description: 'Understand a variety of linear and non-linear print and digital texts', skillArea: 'Reading' },
-          { code: '5.2', description: 'Express personal responses to literary works', skillArea: 'Language Arts' },
+          { code: '1.1', description: 'Recognise and reproduce target language sounds', skillArea: 'Speaking' },
+          { code: '2.2', description: 'Understand a variety of linear and non-linear print and digital texts', skillArea: 'Reading' },
+          { code: '4.2', description: 'Demonstrate understanding of and the ability to use books', skillArea: 'Language Arts' },
         ],
         learningStandards: [
           { code: '1.2.2', description: 'Understand with support specific information and details of very simple phrases and sentences' },
           { code: '2.1.5', description: 'Name or describe objects using suitable words from word sets' },
-          { code: '3.2.2', description: 'Understand specific information and details of very simple phrases and sentences' },
+          { code: '3.2.2', description: 'Find out about personal details by asking basic questions' },
           { code: '5.2.1', description: 'Ask and answer simple questions about characters and actions in stories' },
         ],
         learningObjectives: [
@@ -1449,14 +1449,14 @@ const CURRICULUM_DB = {
         unitNumber: 7, title: 'Get Dressed', topic: 'Get Dressed', theme: 'World of Knowledge',
         contentStandards: [
           { code: '1.2', description: 'Understand meaning in a variety of familiar contexts', skillArea: 'Listening' },
-          { code: '2.1', description: 'Communicate simple information intelligibly', skillArea: 'Speaking' },
-          { code: '3.1', description: 'Recognise words in linear and non-linear texts', skillArea: 'Reading' },
-          { code: '4.2', description: 'Communicate basic information intelligibly for a range of purposes', skillArea: 'Writing' },
+          { code: '1.1', description: 'Recognise and reproduce target language sounds', skillArea: 'Speaking' },
+          { code: '2.1', description: 'Apply phonics knowledge to recognise words', skillArea: 'Reading' },
+          { code: '3.2', description: 'Communicate basic information intelligibly for a range of purposes', skillArea: 'Writing' },
         ],
         learningStandards: [
           { code: '1.2.2', description: 'Understand with support specific information and details of very simple phrases and sentences' },
           { code: '2.1.5', description: 'Name or describe objects using suitable words from word sets' },
-          { code: '3.1.1', description: 'Identify and recognise the shapes of the letters in the alphabet' },
+          { code: '3.1.1', description: 'Form upper and lower case letters with correct proportions' },
           { code: '4.2.4', description: 'Name or describe objects using suitable words from word sets' },
         ],
         learningObjectives: [
@@ -1488,15 +1488,15 @@ const CURRICULUM_DB = {
         unitNumber: 8, title: 'The Robot', topic: 'The Robot', theme: 'World of Knowledge',
         contentStandards: [
           { code: '1.2', description: 'Understand meaning in a variety of familiar contexts', skillArea: 'Listening' },
-          { code: '2.1', description: 'Communicate simple information intelligibly', skillArea: 'Speaking' },
-          { code: '3.2', description: 'Understand a variety of linear and non-linear print and digital texts', skillArea: 'Reading' },
-          { code: '4.2', description: 'Communicate basic information intelligibly for a range of purposes', skillArea: 'Writing' },
+          { code: '1.1', description: 'Recognise and reproduce target language sounds', skillArea: 'Speaking' },
+          { code: '2.2', description: 'Understand a variety of linear and non-linear print and digital texts', skillArea: 'Reading' },
+          { code: '3.2', description: 'Communicate basic information intelligibly for a range of purposes', skillArea: 'Writing' },
         ],
         learningStandards: [
           { code: '1.2.2', description: 'Understand with support specific information and details of very simple phrases and sentences' },
-          { code: '2.1.4', description: 'Ask about and express ability' },
+          { code: '2.1.4', description: 'Segment phonemes to spell words' },
           { code: '2.1.5', description: 'Name or describe objects using suitable words from word sets' },
-          { code: '3.2.2', description: 'Understand specific information and details of very simple phrases and sentences' },
+          { code: '3.2.2', description: 'Find out about personal details by asking basic questions' },
           { code: '4.2.4', description: 'Name or describe objects using suitable words from word sets' },
         ],
         learningObjectives: [
@@ -1532,14 +1532,14 @@ const CURRICULUM_DB = {
         unitNumber: 9, title: 'At the Beach', topic: 'At the Beach', theme: 'World of Knowledge',
         contentStandards: [
           { code: '1.2', description: 'Understand meaning in a variety of familiar contexts', skillArea: 'Listening' },
-          { code: '2.1', description: 'Communicate simple information intelligibly', skillArea: 'Speaking' },
-          { code: '3.2', description: 'Understand a variety of linear and non-linear print and digital texts', skillArea: 'Reading' },
-          { code: '4.2', description: 'Communicate basic information intelligibly for a range of purposes', skillArea: 'Writing' },
+          { code: '1.1', description: 'Recognise and reproduce target language sounds', skillArea: 'Speaking' },
+          { code: '2.2', description: 'Understand a variety of linear and non-linear print and digital texts', skillArea: 'Reading' },
+          { code: '3.2', description: 'Communicate basic information intelligibly for a range of purposes', skillArea: 'Writing' },
         ],
         learningStandards: [
           { code: '1.2.2', description: 'Understand with support specific information and details of very simple phrases and sentences' },
           { code: '2.1.5', description: 'Name or describe objects using suitable words from word sets' },
-          { code: '3.2.2', description: 'Understand specific information and details of very simple phrases and sentences' },
+          { code: '3.2.2', description: 'Find out about personal details by asking basic questions' },
           { code: '4.2.3', description: 'Express basic likes and dislikes' },
         ],
         learningObjectives: [
@@ -1577,8 +1577,8 @@ const CURRICULUM_DB = {
         ],
         learningStandards: [
           { code: '1.1.1', description: 'Recognise and reproduce with support a wide range of target language phonemes' },
-          { code: '2.1.1', description: 'Give simple personal details using basic statements' },
-          { code: '2.1.2', description: 'Find out about personal details by asking questions' },
+          { code: '2.1.1', description: 'Give simple personal information using basic statements' },
+          { code: '2.1.2', description: 'Find out about personal information by asking basic questions' },
         ],
         learningObjectives: [
           'By the end of the lesson, pupils will be able to introduce themselves and ask a friend\'s name using \'What\'s your name?\' and \'My name is...\' with correct pronunciation.',
@@ -1612,12 +1612,12 @@ const CURRICULUM_DB = {
         unitNumber: 2, title: 'Where Do You Live?', topic: 'Where Do You Live?', theme: 'World of Self, Family and Friends',
         contentStandards: [
           { code: '2.1', description: 'Communicate simple information intelligibly', skillArea: 'Speaking' },
-          { code: '3.2', description: 'Understand a variety of linear and non-linear texts', skillArea: 'Reading' },
+          { code: '3.2', description: 'Understand a variety of linear and non-linear print and digital texts', skillArea: 'Reading' },
         ],
         learningStandards: [
-          { code: '2.1.1', description: 'Give simple personal details using basic statements' },
-          { code: '2.1.2', description: 'Find out about personal details by asking questions' },
-          { code: '3.2.2', description: 'Understand specific information and details of simple texts' },
+          { code: '2.1.1', description: 'Give simple personal information using basic statements' },
+          { code: '2.1.2', description: 'Find out about personal information by asking basic questions' },
+          { code: '3.2.2', description: 'Understand specific information and details of simple sentences' },
         ],
         learningObjectives: [
           'By the end of the lesson, pupils will be able to say where they live using \'I live in...\' and ask a friend \'Where do you live?\'',
@@ -1647,13 +1647,13 @@ const CURRICULUM_DB = {
         unitNumber: 3, title: 'My Body', topic: 'My Body', theme: 'World of Knowledge',
         contentStandards: [
           { code: '1.2', description: 'Understand meaning in a variety of familiar contexts', skillArea: 'Listening' },
-          { code: '3.2', description: 'Understand a variety of linear and non-linear texts', skillArea: 'Reading' },
+          { code: '3.2', description: 'Understand a variety of linear and non-linear print and digital texts', skillArea: 'Reading' },
         ],
         learningStandards: [
           { code: '1.2.1', description: 'Understand with support the main idea of simple sentences' },
           { code: '1.2.2', description: 'Understand with support specific information and details of simple sentences' },
-          { code: '3.2.1', description: 'Identify the main idea of simple texts' },
-          { code: '3.2.3', description: 'Read and understand simple descriptions' },
+          { code: '3.2.1', description: 'Understand the main idea of simple sentences' },
+          { code: '3.2.3', description: 'Use appropriate word attack skills' },
         ],
         learningObjectives: [
           'By the end of the lesson, pupils will be able to identify and name at least 5 body parts correctly and follow simple instructions related to body parts.',
@@ -1690,10 +1690,10 @@ const CURRICULUM_DB = {
           { code: '4.2', description: 'Communicate basic information intelligibly for a range of purposes', skillArea: 'Writing' },
         ],
         learningStandards: [
-          { code: '2.1.1', description: 'Give simple personal details using basic statements' },
-          { code: '2.1.3', description: 'Name or describe objects using suitable words from word sets' },
-          { code: '4.2.1', description: 'Ask for and give basic personal information using basic statements' },
-          { code: '4.2.3', description: 'Write short simple texts with guidance' },
+          { code: '2.1.1', description: 'Give simple personal information using basic statements' },
+          { code: '2.1.3', description: 'Give a short sequence of basic instructions' },
+          { code: '4.2.1', description: 'Ask for and give basic personal information using basic questions and statements' },
+          { code: '4.2.3', description: 'Write short familiar instructions' },
         ],
         learningObjectives: [
           'By the end of the lesson, pupils will be able to name at least 4 family members and write a short sentence about one family member.',
@@ -1723,13 +1723,13 @@ const CURRICULUM_DB = {
         unitNumber: 5, title: 'Free Time', topic: 'Free Time', theme: 'World of Self, Family and Friends',
         contentStandards: [
           { code: '1.2', description: 'Understand meaning in a variety of familiar contexts', skillArea: 'Listening' },
-          { code: '3.2', description: 'Understand a variety of linear and non-linear texts', skillArea: 'Reading' },
+          { code: '3.2', description: 'Understand a variety of linear and non-linear print and digital texts', skillArea: 'Reading' },
         ],
         learningStandards: [
           { code: '1.2.2', description: 'Understand with support specific information and details of simple sentences' },
-          { code: '1.2.5', description: 'Understand short questions' },
-          { code: '3.2.1', description: 'Identify the main idea of simple texts' },
-          { code: '3.2.2', description: 'Understand specific information and details of simple texts' },
+          { code: '1.2.5', description: 'Understand an increased range of short supported questions' },
+          { code: '3.2.1', description: 'Understand the main idea of simple sentences' },
+          { code: '3.2.2', description: 'Understand specific information and details of simple sentences' },
         ],
         learningObjectives: [
           'By the end of the lesson, pupils will be able to identify and name at least 4 free-time activities and say what they do on a particular day of the week.',
@@ -1758,14 +1758,14 @@ const CURRICULUM_DB = {
       {
         unitNumber: 6, title: 'The Old House', topic: 'The Old House', theme: 'World of Stories',
         contentStandards: [
-          { code: '3.2', description: 'Understand a variety of linear and non-linear texts', skillArea: 'Reading' },
+          { code: '3.2', description: 'Understand a variety of linear and non-linear print and digital texts', skillArea: 'Reading' },
           { code: '5.1', description: 'Enjoy and appreciate rhymes, poems and songs', skillArea: 'Language Arts' },
         ],
         learningStandards: [
-          { code: '3.2.1', description: 'Identify the main idea of simple texts' },
-          { code: '3.2.3', description: 'Read and understand simple descriptions' },
-          { code: '5.1.1', description: 'Demonstrate appreciation through non-verbal responses' },
-          { code: '5.1.2', description: 'Say the words of simple songs and poems' },
+          { code: '3.2.1', description: 'Understand the main idea of simple sentences' },
+          { code: '3.2.3', description: 'Use appropriate word attack skills' },
+          { code: '5.1.1', description: 'Demonstrate appreciation through non-verbal responses to simple chants, rhymes, action songs' },
+          { code: '5.1.2', description: 'Say words in simple texts, sing simple songs with intelligible pronunciation' },
         ],
         learningObjectives: [
           'By the end of the lesson, pupils will be able to identify at least 4 rooms in a house and describe where objects are using \'in\', \'on\', and \'under\'.',
@@ -1799,9 +1799,9 @@ const CURRICULUM_DB = {
         ],
         learningStandards: [
           { code: '2.1.5', description: 'Describe objects using suitable words and phrases' },
-          { code: '2.1.3', description: 'Name or describe objects using suitable words from word sets' },
+          { code: '2.1.3', description: 'Give a short sequence of basic instructions' },
           { code: '4.2.2', description: 'Express simple ability' },
-          { code: '4.2.3', description: 'Write short simple texts with guidance' },
+          { code: '4.2.3', description: 'Write short familiar instructions' },
         ],
         learningObjectives: [
           'By the end of the lesson, pupils will be able to name at least 4 hobbies and express their ability using \'I can...\' and \'I cannot...\'',
@@ -1830,16 +1830,16 @@ const CURRICULUM_DB = {
       {
         unitNumber: 8, title: 'The Robot', topic: 'The Robot', theme: 'World of Knowledge',
         contentStandards: [
-          { code: '2.1', description: 'Communicate simple information clearly', skillArea: 'Speaking' },
-          { code: '3.2', description: 'Understand a variety of linear and non-linear texts', skillArea: 'Reading' },
-          { code: '4.2', description: 'Write using appropriate language and format', skillArea: 'Writing' },
+          { code: '2.1', description: 'Communicate simple information intelligibly', skillArea: 'Speaking' },
+          { code: '3.2', description: 'Understand a variety of linear and non-linear print and digital texts', skillArea: 'Reading' },
+          { code: '4.2', description: 'Communicate basic information intelligibly for a range of purposes', skillArea: 'Writing' },
         ],
         learningStandards: [
-          { code: '2.1.1', description: 'Give simple personal details using basic statements' },
+          { code: '2.1.1', description: 'Give simple personal information using basic statements' },
           { code: '2.1.5', description: 'Describe objects using suitable words and phrases' },
-          { code: '3.2.1', description: 'Identify the main idea of simple texts' },
-          { code: '3.2.3', description: 'Read and understand simple descriptions' },
-          { code: '4.2.3', description: 'Write short simple texts with guidance' },
+          { code: '3.2.1', description: 'Understand the main idea of simple sentences' },
+          { code: '3.2.3', description: 'Use appropriate word attack skills' },
+          { code: '4.2.3', description: 'Write short familiar instructions' },
         ],
         learningObjectives: [
           'By the end of the lesson, pupils will be able to identify and name at least 2 actions correctly and state what they are doing using \'The robot can...\' or \'The robot can\'t...\'',
@@ -1896,15 +1896,15 @@ const CURRICULUM_DB = {
         unitNumber: 9, title: 'At the Beach', topic: 'At the Beach', theme: 'World of Knowledge',
         contentStandards: [
           { code: '1.2', description: 'Understand meaning in a variety of familiar contexts', skillArea: 'Listening' },
-          { code: '3.2', description: 'Understand a variety of linear and non-linear texts', skillArea: 'Reading' },
+          { code: '3.2', description: 'Understand a variety of linear and non-linear print and digital texts', skillArea: 'Reading' },
           { code: '5.1', description: 'Enjoy and appreciate rhymes, poems and songs', skillArea: 'Language Arts' },
         ],
         learningStandards: [
           { code: '1.2.2', description: 'Understand with support specific information and details of simple sentences' },
-          { code: '1.2.4', description: 'Understand short simple instructions' },
-          { code: '3.2.2', description: 'Understand specific information and details of simple texts' },
-          { code: '3.2.3', description: 'Read and understand simple descriptions' },
-          { code: '5.1.2', description: 'Say the words of simple songs and poems' },
+          { code: '1.2.4', description: 'Understand an increased range of short basic supported classroom instructions' },
+          { code: '3.2.2', description: 'Understand specific information and details of simple sentences' },
+          { code: '3.2.3', description: 'Use appropriate word attack skills' },
+          { code: '5.1.2', description: 'Say words in simple texts, sing simple songs with intelligible pronunciation' },
         ],
         learningObjectives: [
           'By the end of the lesson, pupils will be able to name at least 5 beach-related objects and give a short description of what they see at the beach using \'I can see...\'',
@@ -1941,14 +1941,14 @@ const CURRICULUM_DB = {
         contentStandards: [
           { code: '1.2', description: 'Understand meaning in a variety of familiar contexts', skillArea: 'Listening' },
           { code: '2.1', description: 'Communicate simple information intelligibly', skillArea: 'Speaking' },
-          { code: '3.1', description: 'Recognise words in linear and non-linear texts', skillArea: 'Reading' },
+          { code: '3.1', description: 'Apply phonics knowledge to recognise words', skillArea: 'Reading' },
           { code: '5.1', description: 'Enjoy and appreciate rhymes, poems and songs', skillArea: 'Language Arts' },
         ],
         learningStandards: [
-          { code: '1.2.2', description: 'Understand with support specific information and details of very simple phrases and sentences' },
-          { code: '2.1.1', description: 'Give very simple personal details using basic statements' },
+          { code: '1.2.2', description: 'Understand with support specific information and details of short simple texts' },
+          { code: '2.1.1', description: 'Ask about and express basic opinions' },
           { code: '3.1.1', description: 'Identify, distinguish and recognise the shapes of the letters of the alphabet' },
-          { code: '5.1.1', description: 'Enjoy rhymes and poems through non-verbal responses' },
+          { code: '5.1.1', description: 'Demonstrate appreciation through non-verbal responses to simple chants, rhymes, action songs, poems' },
         ],
         learningObjectives: [
           'At the end of the lesson, pupils will be able to introduce themselves and greet others appropriately using at least 3 greeting phrases.',
@@ -1988,8 +1988,8 @@ const CURRICULUM_DB = {
         ],
         learningStandards: [
           { code: '1.2.3', description: 'Understand with support short simple narratives' },
-          { code: '2.1.1', description: 'Give very simple personal details using basic statements' },
-          { code: '4.3.2', description: 'Spell an increased range of familiar high-frequency words accurately in guided writing' },
+          { code: '2.1.1', description: 'Ask about and express basic opinions' },
+          { code: '4.3.2', description: 'Spell an increased range of familiar high frequency words accurately in guided writing' },
         ],
         learningObjectives: [
           'At the end of the lesson, pupils will be able to talk about their daily routines using present simple tense with at least 3 daily activities.',
@@ -2024,9 +2024,9 @@ const CURRICULUM_DB = {
           { code: '4.2', description: 'Communicate basic information intelligibly for a range of purposes', skillArea: 'Writing' },
         ],
         learningStandards: [
-          { code: '1.2.1', description: 'Understand with support the main idea of very simple phrases and sentences' },
-          { code: '2.1.3', description: 'Name or describe objects using suitable words from word sets' },
-          { code: '4.2.2', description: 'Write simple sentences with guidance' },
+          { code: '1.2.1', description: 'Understand with support the main idea of short simple texts' },
+          { code: '2.1.3', description: 'Give a short sequence of basic directions' },
+          { code: '4.2.2', description: 'Make and give reasons for simple predictions' },
         ],
         learningObjectives: [
           'At the end of the lesson, pupils will be able to describe what is happening right now using present continuous tense with at least 3 action verbs.',
@@ -2057,11 +2057,11 @@ const CURRICULUM_DB = {
         unitNumber: 4, title: 'Our World', topic: 'Year in, Year Out', theme: 'World of Knowledge',
         contentStandards: [
           { code: '3.2', description: 'Understand a variety of linear and non-linear print and digital texts', skillArea: 'Reading' },
-          { code: '4.3', description: 'Communicate with appropriate language form and style', skillArea: 'Writing' },
+          { code: '4.3', description: 'Write using appropriate language, form and style', skillArea: 'Writing' },
         ],
         learningStandards: [
           { code: '3.2.2', description: 'Understand specific information and details of short simple texts' },
-          { code: '4.3.2', description: 'Spell an increased range of familiar high-frequency words accurately' },
+          { code: '4.3.2', description: 'Spell an increased range of familiar high frequency words accurately in guided writing' },
         ],
         learningObjectives: [
           'At the end of the lesson, pupils will be able to read a short text about a festival and spell at least 5 related vocabulary words correctly.',
@@ -2089,12 +2089,12 @@ const CURRICULUM_DB = {
       {
         unitNumber: 5, title: 'My New House', topic: 'My New House', theme: 'World of Knowledge',
         contentStandards: [
-          { code: '3.2', description: 'Understand a variety of linear and non-linear texts', skillArea: 'Reading' },
-          { code: '4.3', description: 'Write with guidance for different purposes', skillArea: 'Writing' },
+          { code: '3.2', description: 'Understand a variety of linear and non-linear print and digital texts', skillArea: 'Reading' },
+          { code: '4.3', description: 'Write using appropriate language, form and style', skillArea: 'Writing' },
         ],
         learningStandards: [
-          { code: '3.2.2', description: 'Understand specific info and details of short simple texts' },
-          { code: '4.3.2', description: 'Spell increased range of familiar high-frequency words accurately in guided writing' },
+          { code: '3.2.2', description: 'Understand specific information and details of short simple texts' },
+          { code: '4.3.2', description: 'Spell an increased range of familiar high frequency words accurately in guided writing' },
         ],
         learningObjectives: [
           'At the end of the lesson, pupils will be able to a) Read and understand a non-linear text by putting at least 3 out of 5 corresponding items at the correct locations based on the text, and b) Name at least 3 out of 5 words related to furniture and houses in guided writing.',
@@ -2143,10 +2143,10 @@ const CURRICULUM_DB = {
           { code: '5.1', description: 'Enjoy and appreciate rhymes, poems and songs', skillArea: 'Language Arts' },
         ],
         learningStandards: [
-          { code: '1.2.2', description: 'Understand with support specific information and details of very simple phrases and sentences' },
-          { code: '2.1.5', description: 'Describe objects using suitable words and phrases' },
-          { code: '4.2.3', description: 'Express basic likes and dislikes' },
-          { code: '5.1.1', description: 'Enjoy rhymes and poems through non-verbal responses' },
+          { code: '1.2.2', description: 'Understand with support specific information and details of short simple texts' },
+          { code: '2.1.5', description: 'Describe people and objects using suitable words and phrases' },
+          { code: '4.2.3', description: 'Give simple directions' },
+          { code: '5.1.1', description: 'Demonstrate appreciation through non-verbal responses to simple chants, rhymes, action songs, poems' },
         ],
         learningObjectives: [
           'At the end of the lesson, pupils will be able to name at least 5 foods and express their preferences using "I like" and "I don\'t like" correctly.',
@@ -2186,7 +2186,7 @@ const CURRICULUM_DB = {
         ],
         learningStandards: [
           { code: '1.3.1', description: 'Listen to and demonstrate understanding of oral texts by answering simple questions' },
-          { code: '2.1.2', description: 'Find out about personal details by asking basic questions' },
+          { code: '2.1.2', description: 'Find out about and describe basic everyday routines' },
           { code: '3.2.2', description: 'Understand specific information and details of short simple texts' },
         ],
         learningObjectives: [
@@ -2222,9 +2222,9 @@ const CURRICULUM_DB = {
           { code: '4.3', description: 'Write using appropriate language, form and style', skillArea: 'Writing' },
         ],
         learningStandards: [
-          { code: '1.2.2', description: 'Understand with support specific information and details of very simple phrases and sentences' },
-          { code: '2.1.1', description: 'Give very simple personal details using basic statements' },
-          { code: '4.3.1', description: 'Use capital letters and basic punctuation appropriately in guided writing' },
+          { code: '1.2.2', description: 'Understand with support specific information and details of short simple texts' },
+          { code: '2.1.1', description: 'Ask about and express basic opinions' },
+          { code: '4.3.1', description: 'Use capital letters, full stops and question marks appropriately in guided writing at sentence level' },
         ],
         learningObjectives: [
           'At the end of the lesson, pupils will be able to talk about where people were yesterday using "was" and "were" correctly in at least 3 sentences.',
@@ -2260,8 +2260,8 @@ const CURRICULUM_DB = {
         ],
         learningStandards: [
           { code: '1.2.3', description: 'Understand with support short simple narratives' },
-          { code: '2.1.1', description: 'Give very simple personal details using basic statements' },
-          { code: '4.2.1', description: 'Give detailed information about themselves' },
+          { code: '2.1.1', description: 'Ask about and express basic opinions' },
+          { code: '4.2.1', description: 'Express simple opinions' },
         ],
         learningObjectives: [
           'At the end of the lesson, pupils will be able to talk about their holiday activities using past simple tense with at least 3 action verbs.',
@@ -2296,9 +2296,9 @@ const CURRICULUM_DB = {
           { code: '5.1', description: 'Enjoy and appreciate rhymes, poems and songs', skillArea: 'Language Arts' },
         ],
         learningStandards: [
-          { code: '2.1.4', description: 'Ask about and express abilities' },
-          { code: '4.2.3', description: 'Express basic likes and dislikes' },
-          { code: '5.1.1', description: 'Enjoy rhymes and poems through non-verbal responses' },
+          { code: '2.1.4', description: 'Ask about, make and respond to simple predictions' },
+          { code: '4.2.3', description: 'Give simple directions' },
+          { code: '5.1.1', description: 'Demonstrate appreciation through non-verbal responses to simple chants, rhymes, action songs, poems' },
         ],
         learningObjectives: [
           'At the end of the lesson, pupils will be able to make suggestions using "Let\'s..." and respond with agreement or disagreement appropriately.',
@@ -2340,10 +2340,10 @@ const CURRICULUM_DB = {
           { code: '4.2', description: 'Communicate basic information intelligibly for a range of purposes', skillArea: 'Writing' },
         ],
         learningStandards: [
-          { code: '1.2.2', description: 'Understand with support specific information and details of simple longer texts' },
-          { code: '2.1.4', description: 'Ask about and describe people using suitable words and phrases' },
-          { code: '3.2.2', description: 'Understand specific information and details of simple longer texts' },
-          { code: '4.2.3', description: 'Describe people using suitable words and phrases' },
+          { code: '1.2.2', description: 'Understand with support specific information and details of short simple texts' },
+          { code: '2.1.4', description: 'Give reasons for simple predictions' },
+          { code: '3.2.2', description: 'Understand specific information and details of simple texts of one or two paragraphs' },
+          { code: '4.2.3', description: 'Describe basic everyday routines' },
         ],
         learningObjectives: [
           'By the end of the lesson, pupils will be able to ask and answer questions about countries and nationalities using \'Where are you from?\' and \'I\'m from...\' with correct pronunciation.',
@@ -2382,13 +2382,13 @@ const CURRICULUM_DB = {
           { code: '1.2', description: 'Understand meaning in a variety of familiar contexts', skillArea: 'Listening' },
           { code: '2.1', description: 'Communicate simple information intelligibly', skillArea: 'Speaking' },
           { code: '3.2', description: 'Understand a variety of linear and non-linear print and digital texts', skillArea: 'Reading' },
-          { code: '4.3', description: 'Communicate with appropriate language form and style', skillArea: 'Writing' },
+          { code: '4.3', description: 'Write using appropriate language, form and style', skillArea: 'Writing' },
         ],
         learningStandards: [
-          { code: '1.2.1', description: 'Understand with support the main idea of simple longer texts' },
-          { code: '2.1.2', description: 'Find out about and describe basic everyday routines' },
-          { code: '3.2.2', description: 'Understand specific information and details of simple longer texts' },
-          { code: '4.3.2', description: 'Spell an increased range of familiar high frequency words accurately' },
+          { code: '1.2.1', description: 'Understand with support the main idea of short simple texts' },
+          { code: '2.1.2', description: 'Find out about and describe experiences in the past' },
+          { code: '3.2.2', description: 'Understand specific information and details of simple texts of one or two paragraphs' },
+          { code: '4.3.2', description: 'Spell most high frequency words accurately in guided writing' },
         ],
         learningObjectives: [
           'By the end of the lesson, pupils will be able to name all 7 days of the week in order and describe at least 3 daily activities using present simple tense.',
@@ -2423,13 +2423,13 @@ const CURRICULUM_DB = {
           { code: '1.2', description: 'Understand meaning in a variety of familiar contexts', skillArea: 'Listening' },
           { code: '2.1', description: 'Communicate simple information intelligibly', skillArea: 'Speaking' },
           { code: '3.2', description: 'Understand a variety of linear and non-linear print and digital texts', skillArea: 'Reading' },
-          { code: '4.3', description: 'Communicate with appropriate language form and style', skillArea: 'Writing' },
+          { code: '4.3', description: 'Write using appropriate language, form and style', skillArea: 'Writing' },
         ],
         learningStandards: [
           { code: '1.2.3', description: 'Understand with support short simple narratives' },
-          { code: '2.1.5', description: 'Describe people and objects using suitable words and phrases' },
-          { code: '3.2.2', description: 'Understand specific information and details of simple longer texts' },
-          { code: '4.3.3', description: 'Plan, draft and write simple recounts' },
+          { code: '2.1.5', description: 'Describe people and objects using suitable statements' },
+          { code: '3.2.2', description: 'Understand specific information and details of simple texts of one or two paragraphs' },
+          { code: '4.3.3', description: 'Produce a plan or draft of one paragraph for a familiar topic and modify this appropriately in response to feedback' },
         ],
         learningObjectives: [
           'By the end of the lesson, pupils will be able to identify and use past simple forms of \'was\' and \'were\' correctly in sentences about past events.',
@@ -2471,10 +2471,10 @@ const CURRICULUM_DB = {
           { code: '4.2', description: 'Communicate basic information intelligibly for a range of purposes', skillArea: 'Writing' },
         ],
         learningStandards: [
-          { code: '1.2.1', description: 'Understand with support the main idea of simple longer texts' },
-          { code: '2.1.4', description: 'Ask about and describe people and objects using suitable words and phrases' },
-          { code: '3.2.2', description: 'Understand specific information and details of simple longer texts' },
-          { code: '4.2.3', description: 'Describe people and objects using suitable words and phrases' },
+          { code: '1.2.1', description: 'Understand with support the main idea of short simple texts' },
+          { code: '2.1.4', description: 'Give reasons for simple predictions' },
+          { code: '3.2.2', description: 'Understand specific information and details of simple texts of one or two paragraphs' },
+          { code: '4.2.3', description: 'Describe basic everyday routines' },
         ],
         learningObjectives: [
           'By the end of the lesson, pupils will be able to name at least 3 different celebrations and describe what people do during each celebration.',
@@ -2511,9 +2511,9 @@ const CURRICULUM_DB = {
           { code: '4.2', description: 'Communicate basic information intelligibly for a range of purposes', skillArea: 'Writing' },
         ],
         learningStandards: [
-          { code: '2.1.5', description: 'Describe people and objects using suitable words and phrases' },
-          { code: '3.2.1', description: 'Understand the main idea of simple longer texts' },
-          { code: '4.2.1', description: 'Give detailed information about themselves' },
+          { code: '2.1.5', description: 'Describe people and objects using suitable statements' },
+          { code: '3.2.1', description: 'Understand the main idea of simple texts of one or two paragraphs' },
+          { code: '4.2.1', description: 'Explain and give reasons for simple opinions' },
         ],
         learningObjectives: [
           'By the end of the lesson, pupils will be able to classify at least 5 food items into healthy and unhealthy categories using \'There is\' / \'There are\' correctly.',
@@ -2550,8 +2550,8 @@ const CURRICULUM_DB = {
           { code: '3.2', description: 'Understand a variety of linear and non-linear print and digital texts', skillArea: 'Reading' },
         ],
         learningStandards: [
-          { code: '1.2.4', description: 'Understand an increased range of short supported questions' },
-          { code: '2.1.3', description: 'Give a short sequence of basic instructions' },
+          { code: '1.2.4', description: 'Understand a wide range of short basic supported classroom instructions' },
+          { code: '2.1.3', description: 'Give a longer sequence of basic instructions or directions' },
           { code: '3.2.3', description: 'Guess the meaning of unfamiliar words from clues provided by title and topic' },
         ],
         learningObjectives: [
@@ -2593,9 +2593,9 @@ const CURRICULUM_DB = {
           { code: '4.2', description: 'Communicate basic information intelligibly for a range of purposes', skillArea: 'Writing' },
         ],
         learningStandards: [
-          { code: '2.1.4', description: 'Ask about and describe people and objects using suitable words and phrases' },
-          { code: '3.2.2', description: 'Understand specific information and details of simple longer texts' },
-          { code: '4.2.3', description: 'Describe people and objects using suitable words and phrases' },
+          { code: '2.1.4', description: 'Give reasons for simple predictions' },
+          { code: '3.2.2', description: 'Understand specific information and details of simple texts of one or two paragraphs' },
+          { code: '4.2.3', description: 'Describe basic everyday routines' },
         ],
         learningObjectives: [
           'By the end of the lesson, pupils will be able to name at least 5 community helpers and describe what each one does using present simple tense.',
@@ -2629,12 +2629,12 @@ const CURRICULUM_DB = {
         contentStandards: [
           { code: '1.2', description: 'Understand meaning in a variety of familiar contexts', skillArea: 'Listening' },
           { code: '3.2', description: 'Understand a variety of linear and non-linear print and digital texts', skillArea: 'Reading' },
-          { code: '4.3', description: 'Communicate with appropriate language form and style', skillArea: 'Writing' },
+          { code: '4.3', description: 'Write using appropriate language, form and style', skillArea: 'Writing' },
         ],
         learningStandards: [
-          { code: '1.2.2', description: 'Understand with support specific information and details of simple longer texts' },
-          { code: '3.2.2', description: 'Understand specific information and details of simple longer texts' },
-          { code: '4.3.2', description: 'Spell an increased range of familiar high frequency words accurately' },
+          { code: '1.2.2', description: 'Understand with support specific information and details of short simple texts' },
+          { code: '3.2.2', description: 'Understand specific information and details of simple texts of one or two paragraphs' },
+          { code: '4.3.2', description: 'Spell most high frequency words accurately in guided writing' },
         ],
         learningObjectives: [
           'By the end of the lesson, pupils will be able to name at least 6 animals and describe one physical feature or ability for each using \'can\' and \'have got\'.',
@@ -2675,9 +2675,9 @@ const CURRICULUM_DB = {
           { code: '4.2', description: 'Communicate basic information intelligibly for a range of purposes', skillArea: 'Writing' },
         ],
         learningStandards: [
-          { code: '1.2.5', description: 'Understand short supported questions' },
-          { code: '2.1.1', description: 'Ask about and express ability' },
-          { code: '4.2.1', description: 'Give detailed information about themselves' },
+          { code: '1.2.5', description: 'Understand a wide range of short supported questions' },
+          { code: '2.1.1', description: 'Explain and give reasons for basic opinions' },
+          { code: '4.2.1', description: 'Explain and give reasons for simple opinions' },
         ],
         learningObjectives: [
           'By the end of the lesson, pupils will be able to ask and answer questions about abilities using \'Can you...?\' and \'Yes, I can.\' / \'No, I can\'t.\' with correct intonation.',
@@ -2711,12 +2711,12 @@ const CURRICULUM_DB = {
         contentStandards: [
           { code: '2.1', description: 'Communicate simple information intelligibly', skillArea: 'Speaking' },
           { code: '3.2', description: 'Understand a variety of linear and non-linear print and digital texts', skillArea: 'Reading' },
-          { code: '4.3', description: 'Communicate with appropriate language form and style', skillArea: 'Writing' },
+          { code: '4.3', description: 'Write using appropriate language, form and style', skillArea: 'Writing' },
         ],
         learningStandards: [
-          { code: '2.1.5', description: 'Describe people and objects using suitable words and phrases' },
-          { code: '3.2.2', description: 'Understand specific information and details of simple longer texts' },
-          { code: '4.3.2', description: 'Spell an increased range of familiar high frequency words accurately' },
+          { code: '2.1.5', description: 'Describe people and objects using suitable statements' },
+          { code: '3.2.2', description: 'Understand specific information and details of simple texts of one or two paragraphs' },
+          { code: '4.3.2', description: 'Spell most high frequency words accurately in guided writing' },
         ],
         learningObjectives: [
           'By the end of the lesson, pupils will be able to name at least 5 common health problems (headache, stomachache, fever, cough, cold) and ask \'What\'s the matter?\' / \'I have a...\'.',
@@ -2755,9 +2755,9 @@ const CURRICULUM_DB = {
           { code: '3.2', description: 'Understand a variety of linear and non-linear print and digital texts', skillArea: 'Reading' },
         ],
         learningStandards: [
-          { code: '2.1.5', description: 'Describe people and objects using suitable words and phrases' },
-          { code: '4.2.3', description: 'Describe people and objects using suitable words and phrases' },
-          { code: '3.2.2', description: 'Understand specific information and details of simple texts of one or two paragraphs' },
+          { code: '2.1.5', description: 'Describe people, places and objects using suitable statements' },
+          { code: '4.2.3', description: 'Narrate factual events and experiences of interest' },
+          { code: '3.2.2', description: 'Understand specific information and details of simple texts of two paragraphs or more' },
         ],
         learningObjectives: [
           'At the end of the lesson, pupils will be able to describe a classmate\'s appearance and personality using at least 5 descriptive adjectives in a short paragraph.',
@@ -2797,9 +2797,9 @@ const CURRICULUM_DB = {
           { code: '4.2', description: 'Communicate basic information intelligibly for a range of purposes', skillArea: 'Writing' },
         ],
         learningStandards: [
-          { code: '1.2.2', description: 'Understand with support specific information and details of longer simple texts' },
-          { code: '2.1.5', description: 'Describe people and objects using suitable words and phrases' },
-          { code: '4.2.5', description: 'Connect sentences into one or two coherent paragraphs' },
+          { code: '1.2.2', description: 'Understand with support specific information and details of longer simple texts on a range of familiar topics' },
+          { code: '2.1.5', description: 'Describe people, places and objects using suitable statements' },
+          { code: '4.2.5', description: 'Connect sentences into one or two coherent paragraphs using basic coordinating conjunctions and reference pronouns' },
         ],
         learningObjectives: [
           'By the end of the lesson, pupils will be able to talk about their daily routines using time expressions and sequence adverbs (first, then, after that, finally).',
@@ -2835,9 +2835,9 @@ const CURRICULUM_DB = {
           { code: '1.2', description: 'Understand meaning in a variety of familiar contexts', skillArea: 'Listening' },
         ],
         learningStandards: [
-          { code: '3.2.1', description: 'Understand the main idea of simple texts of one or two paragraphs' },
-          { code: '4.2.3', description: 'Describe people and objects using suitable words and phrases' },
-          { code: '1.2.2', description: 'Understand with support specific information and details of longer simple texts' },
+          { code: '3.2.1', description: 'Understand the main idea of simple texts of two paragraphs or more' },
+          { code: '4.2.3', description: 'Narrate factual events and experiences of interest' },
+          { code: '1.2.2', description: 'Understand with support specific information and details of longer simple texts on a range of familiar topics' },
         ],
         learningObjectives: [
           'At the end of the lesson, pupils will be able to read a short text about an animal and identify its habitat, diet, and physical features.',
@@ -2877,9 +2877,9 @@ const CURRICULUM_DB = {
           { code: '3.2', description: 'Understand a variety of linear and non-linear print and digital texts', skillArea: 'Reading' },
         ],
         learningStandards: [
-          { code: '2.1.1', description: 'Ask about and describe basic personal information' },
-          { code: '4.2.2', description: 'Make and respond to simple offers and invitations' },
-          { code: '3.2.2', description: 'Understand specific information and details of simple texts of one or two paragraphs' },
+          { code: '2.1.1', description: 'Give detailed information about themselves' },
+          { code: '4.2.2', description: 'Ask for, give and respond to simple advice' },
+          { code: '3.2.2', description: 'Understand specific information and details of simple texts of two paragraphs or more' },
         ],
         learningObjectives: [
           'By the end of the lesson, pupils will be able to express opinions about school subjects using appropriate language (I like/don\'t like, I think, In my opinion).',
@@ -2912,7 +2912,7 @@ const CURRICULUM_DB = {
         contentStandards: [
           { code: '4.2', description: 'Communicate basic information intelligibly for a range of purposes', skillArea: 'Writing' },
           { code: '2.1', description: 'Communicate simple information intelligibly', skillArea: 'Speaking' },
-          { code: '3.2', description: 'Understand a variety of linear and non-linear texts', skillArea: 'Reading' },
+          { code: '3.2', description: 'Understand a variety of linear and non-linear print and digital texts', skillArea: 'Reading' },
           { code: '2.2', description: 'Use appropriate communication strategies', skillArea: 'Speaking' },
         ],
         learningStandards: [
@@ -2970,12 +2970,12 @@ const CURRICULUM_DB = {
         contentStandards: [
           { code: '1.2', description: 'Understand meaning in a variety of familiar contexts', skillArea: 'Listening' },
           { code: '2.1', description: 'Communicate simple information intelligibly', skillArea: 'Speaking' },
-          { code: '4.3', description: 'Communicate with appropriate language form and style', skillArea: 'Writing' },
+          { code: '4.3', description: 'Write using appropriate language, form and style', skillArea: 'Writing' },
         ],
         learningStandards: [
-          { code: '1.2.4', description: 'Understand longer supported classroom instructions' },
+          { code: '1.2.4', description: 'Understand a wide range of short basic supported classroom instructions' },
           { code: '2.1.2', description: 'Find out about and describe experiences up to now' },
-          { code: '4.3.3', description: 'Plan, draft and write an increasing range of sentence types' },
+          { code: '4.3.3', description: 'Produce a plan or draft of one or two paragraphs for a familiar topic and modify this appropriately in response to feedback' },
         ],
         learningObjectives: [
           'At the end of the lesson, pupils will be able to talk about sports they play using present simple for routines and present continuous for current activities.',
@@ -3011,8 +3011,8 @@ const CURRICULUM_DB = {
           { code: '2.1', description: 'Communicate simple information intelligibly', skillArea: 'Speaking' },
         ],
         learningStandards: [
-          { code: '3.2.2', description: 'Understand specific information and details of simple texts of one or two paragraphs' },
-          { code: '4.2.4', description: 'Describe experiences up to now' },
+          { code: '3.2.2', description: 'Understand specific information and details of simple texts of two paragraphs or more' },
+          { code: '4.2.4', description: 'Describe people, places and objects using suitable statements' },
           { code: '2.1.2', description: 'Find out about and describe experiences up to now' },
         ],
         learningObjectives: [
@@ -3053,9 +3053,9 @@ const CURRICULUM_DB = {
           { code: '4.2', description: 'Communicate basic information intelligibly for a range of purposes', skillArea: 'Writing' },
         ],
         learningStandards: [
-          { code: '1.2.1', description: 'Understand with support the main idea of longer simple texts' },
+          { code: '1.2.1', description: 'Understand with support the main idea of longer simple texts on a range of familiar topics' },
           { code: '2.1.4', description: 'Ask about and describe future plans' },
-          { code: '4.2.5', description: 'Connect sentences into one or two coherent paragraphs' },
+          { code: '4.2.5', description: 'Connect sentences into one or two coherent paragraphs using basic coordinating conjunctions and reference pronouns' },
         ],
         learningObjectives: [
           'At the end of the lesson, pupils will be able to talk about future holiday plans using the going to structure with appropriate time expressions.',
@@ -3093,9 +3093,9 @@ const CURRICULUM_DB = {
           { code: '4.2', description: 'Communicate basic information intelligibly for a range of purposes', skillArea: 'Writing' },
         ],
         learningStandards: [
-          { code: '2.1.1', description: 'Ask about and describe personal information in detail' },
+          { code: '2.1.1', description: 'Give detailed information about themselves and others' },
           { code: '3.2.2', description: 'Understand specific information and details of simple longer texts' },
-          { code: '4.2.5', description: 'Connect sentences into two coherent paragraphs' },
+          { code: '4.2.5', description: 'Connect sentences into two coherent paragraphs or more using basic coordinating conjunctions and reference pronouns' },
         ],
         learningObjectives: [
           'At the end of the lesson, pupils will be able to give a short guided tour of their school using there is/there are and prepositions of place.',
@@ -3132,8 +3132,8 @@ const CURRICULUM_DB = {
         ],
         learningStandards: [
           { code: '3.2.2', description: 'Understand specific information and details of simple longer texts' },
-          { code: '4.2.2', description: 'Describe people and objects using suitable words and phrases' },
-          { code: '1.2.2', description: 'Understand with little or no support specific information and details of longer simple texts' },
+          { code: '4.2.2', description: 'Describe future plans or events' },
+          { code: '1.2.2', description: 'Understand with little or no support specific information and details of longer simple texts on a range of familiar topics' },
         ],
         learningObjectives: [
           'By the end of the lesson, pupils will be able to describe a person\'s appearance in detail using has got, wears, and descriptive adjectives (height, build, hair, eyes, clothing).',
@@ -3171,7 +3171,7 @@ const CURRICULUM_DB = {
         learningStandards: [
           { code: '3.2.1', description: 'Understand the main idea of simple longer texts' },
           { code: '4.2.3', description: 'Narrate factual and imagined events and experiences' },
-          { code: '2.1.2', description: 'Find out about and describe experiences in detail' },
+          { code: '2.1.2', description: 'Ask about and express rules and obligations' },
         ],
         learningObjectives: [
           'At the end of the lesson, pupils will be able to read a short biography about a real-life hero and extract key information (birth, achievements, character traits).',
@@ -3211,9 +3211,9 @@ const CURRICULUM_DB = {
           { code: '4.2', description: 'Communicate basic information intelligibly for a range of purposes', skillArea: 'Writing' },
         ],
         learningStandards: [
-          { code: '1.2.2', description: 'Understand with little or no support specific information and details of longer simple texts' },
-          { code: '2.1.1', description: 'Ask about and describe personal information in detail' },
-          { code: '4.2.1', description: 'Give detailed information about themselves' },
+          { code: '1.2.2', description: 'Understand with little or no support specific information and details of longer simple texts on a range of familiar topics' },
+          { code: '2.1.1', description: 'Give detailed information about themselves and others' },
+          { code: '4.2.1', description: 'Give detailed information about themselves and others' },
         ],
         learningObjectives: [
           'By the end of the lesson, pupils will be able to describe different jobs and the responsibilities associated with each job using present simple tense and vocabulary related to occupations.',
@@ -3254,8 +3254,8 @@ const CURRICULUM_DB = {
         ],
         learningStandards: [
           { code: '3.2.2', description: 'Understand specific information and details of simple longer texts' },
-          { code: '4.2.5', description: 'Connect sentences into two coherent paragraphs' },
-          { code: '2.1.5', description: 'Describe people and objects in detail' },
+          { code: '4.2.5', description: 'Connect sentences into two coherent paragraphs or more using basic coordinating conjunctions and reference pronouns' },
+          { code: '2.1.5', description: 'Ask about and describe personality' },
         ],
         learningObjectives: [
           'At the end of the lesson, pupils will be able to read short informational texts about different countries and cultures, identifying key details about food, landmarks, and customs.',
@@ -3291,9 +3291,9 @@ const CURRICULUM_DB = {
           { code: '4.2', description: 'Communicate basic information intelligibly for a range of purposes', skillArea: 'Writing' },
         ],
         learningStandards: [
-          { code: '1.2.4', description: 'Understand longer supported classroom instructions' },
+          { code: '1.2.4', description: 'Understand a wide range of short basic supported classroom instructions' },
           { code: '2.1.3', description: 'Explain and give reasons for simple advice' },
-          { code: '4.2.2', description: 'Describe people and objects using suitable words and phrases' },
+          { code: '4.2.2', description: 'Describe future plans or events' },
         ],
         learningObjectives: [
           'At the end of the lesson, pupils will be able to describe different modes of transport and give reasons for choosing one over another using comparative adverbs and because.',
@@ -3331,7 +3331,7 @@ const CURRICULUM_DB = {
         learningStandards: [
           { code: '3.2.1', description: 'Understand the main idea of simple longer texts' },
           { code: '4.2.3', description: 'Narrate factual and imagined events and experiences' },
-          { code: '5.2.1', description: 'Talk about characters and plot in a story' },
+          { code: '5.2.1', description: 'Describe in simple language a character\'s actions or feelings and explain the reasons for them' },
         ],
         learningObjectives: [
           'At the end of the lesson, pupils will be able to read and understand a simplified myth or legend, identifying characters, setting, and plot sequence.',
@@ -3372,8 +3372,8 @@ const CURRICULUM_DB = {
         ],
         learningStandards: [
           { code: '4.2.3', description: 'Narrate factual and imagined events and experiences' },
-          { code: '5.2.1', description: 'Talk about characters and plot in a story' },
-          { code: '3.2.3', description: 'Guess the meaning of unfamiliar words from clues' },
+          { code: '5.2.1', description: 'Describe in simple language a character\'s actions or feelings and explain the reasons for them' },
+          { code: '3.2.3', description: 'Guess the meaning of unfamiliar words from clues provided by other known words and by context' },
         ],
         learningObjectives: [
           'At the end of the lesson, pupils will be able to plan and write a short creative story with a clear beginning, middle, and end using appropriate narrative tenses.',
@@ -3404,15 +3404,15 @@ const CURRICULUM_DB = {
       {
         unitNumber: 9, title: 'What...If?', topic: "What's Your Opinion?", theme: 'World of Knowledge',
         contentStandards: [
-          { code: '4.3', description: 'Communicate with appropriate language form and style', skillArea: 'Writing' },
-          { code: '4.2', description: 'Communicate basic information intelligibly', skillArea: 'Writing' },
+          { code: '4.3', description: 'Write using appropriate language, form and style', skillArea: 'Writing' },
+          { code: '4.2', description: 'Communicate basic information intelligibly for a range of purposes', skillArea: 'Writing' },
           { code: '1.2', description: 'Understand meaning in a variety of familiar contexts', skillArea: 'Listening' },
           { code: '2.1', description: 'Communicate simple information intelligibly', skillArea: 'Speaking' },
         ],
         learningStandards: [
-          { code: '4.3.3', description: 'Produce a plan or draft of two paragraphs or more for a familiar topic' },
+          { code: '4.3.3', description: 'Produce a plan or draft of two paragraphs or more for a familiar topic and modify this appropriately in response to feedback' },
           { code: '4.2.3', description: 'Narrate factual and imagined events and experiences' },
-          { code: '1.2.3', description: 'Understand with little or no support longer simple narratives' },
+          { code: '1.2.3', description: 'Understand with support short simple narratives' },
           { code: '2.1.3', description: 'Explain and give reasons for simple advice' },
         ],
         learningObjectives: [
@@ -3471,7 +3471,7 @@ const CURRICULUM_DB = {
           { code: '2.1', description: 'Communicate simple information intelligibly', skillArea: 'Speaking' },
         ],
         learningStandards: [
-          { code: '3.2.3', description: 'Guess the meaning of unfamiliar words from clues' },
+          { code: '3.2.3', description: 'Guess the meaning of unfamiliar words from clues provided by other known words and by context' },
           { code: '4.2.3', description: 'Narrate factual and imagined events and experiences' },
           { code: '2.1.3', description: 'Explain and give reasons for simple advice' },
         ],
