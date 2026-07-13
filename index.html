@@ -1153,16 +1153,18 @@ document.addEventListener('alpine:init', () => {
 
     async downloadPlanPDF(plan) {
       const el = document.createElement('div')
-      el.innerHTML = this.buildPDFHtml(plan)
-      el.style.position = 'fixed'; el.style.left = '-9999px'; el.style.top = '0'
+      el.innerHTML = '<div style="max-width:210mm;margin:0 auto">' + this.buildPDFHtml(plan) + '</div>'
+      el.style.position = 'absolute'; el.style.left = '-9999px'; el.style.top = '0'; el.style.width = '210mm'
       document.body.appendChild(el)
       try {
         await html2pdf().set({
-          margin: [0.5, 0.5, 0.5, 0.5],
+          margin: [0.4, 0.4, 0.4, 0.4],
           filename: (plan.title || 'lesson-plan').replace(/[^a-z0-9]/gi, '_') + '.pdf',
           image: { type: 'jpeg', quality: 0.98 },
-          html2canvas: { scale: 2, useCORS: true, logging: false },
+          enableLinks: false,
+          html2canvas: { scale: 2, useCORS: true, logging: false, scrollY: 0, windowHeight: el.scrollHeight },
           jsPDF: { unit: 'in', format: 'a4', orientation: 'portrait' },
+          pagebreak: { mode: ['avoid-all', 'css', 'legacy'] },
         }).from(el).save()
       } catch(e) { console.error(e) }
       document.body.removeChild(el)
@@ -1171,15 +1173,19 @@ document.addEventListener('alpine:init', () => {
     exportAllPDF() {
       if (!this.lessonPlans.length) return
       const el = document.createElement('div')
-      el.innerHTML = this.lessonPlans.map(p => this.buildPDFHtml(p)).join('<div style="page-break-after:always"></div>')
-      el.style.position = 'fixed'; el.style.left = '-9999px'; el.style.top = '0'
+      el.innerHTML = '<div style="max-width:210mm;margin:0 auto">' + this.lessonPlans.map(p => {
+        return '<div style="page-break-after:always;page-break-inside:avoid">' + this.buildPDFHtml(p) + '</div>'
+      }).join('') + '</div>'
+      el.style.position = 'absolute'; el.style.left = '-9999px'; el.style.top = '0'; el.style.width = '210mm'
       document.body.appendChild(el)
       html2pdf().set({
-        margin: [0.5, 0.5, 0.5, 0.5],
+        margin: [0.4, 0.4, 0.4, 0.4],
         filename: 'MALP_All_Lesson_Plans.pdf',
         image: { type: 'jpeg', quality: 0.98 },
-        html2canvas: { scale: 2, useCORS: true, logging: false },
+        enableLinks: false,
+        html2canvas: { scale: 2, useCORS: true, logging: false, scrollY: 0, windowHeight: el.scrollHeight },
         jsPDF: { unit: 'in', format: 'a4', orientation: 'portrait' },
+        pagebreak: { mode: ['avoid-all', 'css', 'legacy'] },
       }).from(el).save().then(() => {
         document.body.removeChild(el)
       }).catch(() => {
