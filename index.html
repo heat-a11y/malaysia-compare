@@ -20,6 +20,9 @@
     @media (max-width: 768px) { .sidebar-open { transform: translateX(0); } }
     .fade-in { animation: fadeIn 0.2s ease-out; }
     @keyframes fadeIn { from { opacity: 0; transform: translateY(4px); } to { opacity: 1; transform: translateY(0); } }
+    .card-pop { animation: cardPop 0.5s ease-out; }
+    @keyframes cardPop { 0% { opacity: 0; transform: scale(0.97); } 40% { opacity: 1; transform: scale(1.01); } 100% { transform: scale(1); } }
+    .btn-busy { pointer-events: none; opacity: 0.7; }
   </style>
 </head>
 <body>
@@ -246,11 +249,11 @@
           </div>
 
           <div class="mt-4 flex flex-wrap items-center gap-3">
-            <button @click="generateWeekPlans()" class="inline-flex items-center gap-2 rounded-lg bg-indigo-600 px-6 py-2.5 text-sm font-semibold text-white shadow-md transition-colors hover:bg-indigo-700">
-              <span class="text-lg">&#x26A1;</span> Generate Lesson Plans
+            <button @click="generateWeekPlans()" x-bind:class="generating ? 'btn-busy' : ''" class="inline-flex items-center gap-2 rounded-lg bg-indigo-600 px-6 py-2.5 text-sm font-semibold text-white shadow-md transition-colors hover:bg-indigo-700">
+              <span class="text-lg">&#x26A1;</span> <span x-text="generating ? 'Generating\u2026' : 'Generate Lesson Plans'"></span>
             </button>
-            <button @click="generateFullWeek()" class="inline-flex items-center gap-2 rounded-lg bg-emerald-600 px-6 py-2.5 text-sm font-semibold text-white shadow-md transition-colors hover:bg-emerald-700">
-              <span class="text-lg">&#x26A1;</span> Generate Full Week
+            <button @click="generateFullWeek()" x-bind:class="generating ? 'btn-busy' : ''" class="inline-flex items-center gap-2 rounded-lg bg-emerald-600 px-6 py-2.5 text-sm font-semibold text-white shadow-md transition-colors hover:bg-emerald-700">
+              <span class="text-lg">&#x26A1;</span> <span x-text="generating ? 'Generating\u2026' : 'Generate Full Week'"></span>
             </button>
             <span class="text-xs text-slate-400" x-text="'From ' + Object.keys(slotsByDay).length + ' day(s) · ' + slotsForWeek.length + ' slot(s)'"></span>
             <button @click="exportAllPlans()" class="inline-flex items-center gap-1.5 rounded-lg border bg-white px-3 py-2 text-xs font-medium text-slate-500 shadow-sm transition-colors hover:bg-slate-50">
@@ -275,7 +278,7 @@
 
         <div x-show="lessonPlans.length" class="space-y-4">
           <template x-for="plan in lessonPlans" :key="plan.id">
-            <div class="rounded-xl border bg-white shadow-sm transition-shadow hover:shadow">
+            <div x-bind:class="plan._animating ? 'card-pop' : ''" class="rounded-xl border bg-white shadow-sm transition-shadow hover:shadow">
               <!-- header -->
               <div
                 @click="plan._open = !plan._open"
@@ -610,6 +613,8 @@ document.addEventListener('alpine:init', () => {
     weekOffset: 0,
     genWeekOffset: 0,
 
+    generating: false,
+
     // ── Form state ──
     form: { yearGroup: 'Year 1', unit: '', theme: 'World of Self, Family and Friends', topic: '', skillArea: 'Reading' },
 
@@ -890,9 +895,13 @@ document.addEventListener('alpine:init', () => {
     },
 
     generateWeekPlans() {
+      if (this.generating) return
+      this.generating = true
+
       const f = this.form
       const range = this.weekBoundsFor(this.genWeekOffset)
       const fmt = d => d.toLocaleDateString('en-GB', { day:'2-digit', month:'short', year:'numeric' })
+      const plans = []
 
       Object.keys(this.slotsByDay).forEach(day => {
         const slots = this.slotsByDay[day]
@@ -900,15 +909,20 @@ document.addEventListener('alpine:init', () => {
         const dateStr = fmt(slotDate)
 
         slots.forEach(slot => {
-          const unit = f.unit
-            ? this.availableUnits.find(u => u.unitNumber == f.unit)
-            : (CURRICULUM_DB.units[slot.yearGroup] || [])[0]
-
+          const allUnits = CURRICULUM_DB.units[slot.yearGroup] || []
+          let unit
+          if (f.unit) {
+            unit = allUnits.find(u => u.unitNumber == f.unit)
+          } else {
+            const withMods = allUnits.filter(u => u.modules?.length)
+            unit = withMods.length ? withMods[Math.floor(Math.random() * withMods.length)] : allUnits[0]
+          }
           if (!unit) return
 
+          const sessionsCount = unit.modules?.length || 1
+          const sessionIndex = Math.floor(Math.random() * sessionsCount)
           const isPart2 = slot.part === 2
-          const moduleKey = isPart2 ? 'part2' : 'part1'
-          const suffix = isPart2 ? ' (Part 2)' : ' (Part 1)'
+          const suffix = isPart2 ? ' (Part 2)' : (sessionsCount > 1 ? ' (' + (unit.modules[sessionIndex]?.label || 'Session ' + (sessionIndex + 1)) + ')' : ' (Part 1)')
 
           const plan = {
             id: this.generateId(),
@@ -942,19 +956,28 @@ document.addEventListener('alpine:init', () => {
             activities: unit.modules?.length
               ? this.buildActivitiesFromModule(unit, sessionIndex)
               : [
-                  { id: this.generateId(), phase: 'Set Induction', description: 'Engage pupils with a starter activity.', duration: 5, teacherRole: 'Facilitator', studentRole: 'Participant' },
-                  { id: this.generateId(), phase: 'Pre-lesson', description: 'Introduce key vocabulary.', duration: 5, teacherRole: 'Instructor', studentRole: 'Listener' },
-                  { id: this.generateId(), phase: 'Lesson Development', description: 'Main task related to ' + unit.title, duration: Math.max(15, this.minutesBetween(slot.startTime, slot.endTime) - 15), teacherRole: 'Facilitator', studentRole: 'Active learner' },
-                  { id: this.generateId(), phase: 'Post-lesson', description: 'Pupils share their work.', duration: 5, teacherRole: 'Moderator', studentRole: 'Presenter' },
-                  { id: this.generateId(), phase: 'Closure', description: 'Recap and exit ticket.', duration: 5, teacherRole: 'Facilitator', studentRole: 'Reflector' },
+                  { id: this.generateId(), phase: 'Set Induction', description: 'Engage pupils with a starter activity about ' + unit.title + '.', duration: 5 + Math.floor(Math.random() * 4), teacherRole: 'Facilitator', studentRole: 'Participant' },
+                  { id: this.generateId(), phase: 'Pre-lesson', description: 'Introduce and drill key vocabulary using flashcards.', duration: 5 + Math.floor(Math.random() * 4), teacherRole: 'Instructor', studentRole: 'Listener' },
+                  { id: this.generateId(), phase: 'Lesson Development', description: 'Main task related to ' + unit.title, duration: Math.max(15, this.minutesBetween(slot.startTime, slot.endTime) - 15 + Math.floor(Math.random() * 6 - 3)), teacherRole: 'Facilitator', studentRole: 'Active learner' },
+                  { id: this.generateId(), phase: 'Post-lesson', description: 'Pupils share their work and give feedback.', duration: 5 + Math.floor(Math.random() * 4), teacherRole: 'Moderator', studentRole: 'Presenter' },
+                  { id: this.generateId(), phase: 'Closure', description: 'Recap key points. Exit ticket: "One new word I learned is ____".', duration: 5, teacherRole: 'Facilitator', studentRole: 'Reflector' },
                 ],
-            song: unit.songs?.[0] || null,
+            song: unit.songs?.length ? unit.songs[Math.floor(Math.random() * unit.songs.length)] : null,
             reflection: '',
             _open: true,
+            _animating: true,
           }
-          this.lessonPlans = [plan, ...this.lessonPlans]
+          plans.push(plan)
         })
       })
+
+      // Shuffle plan order for variety
+      for (let i = plans.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1)); [plans[i], plans[j]] = [plans[j], plans[i]]
+      }
+      this.lessonPlans = [...plans, ...this.lessonPlans]
+      setTimeout(() => { this.lessonPlans = this.lessonPlans.map(p => ({ ...p, _animating: false })) }, 600)
+      setTimeout(() => { this.generating = false }, 400)
     },
 
     bestUnitForYear(yearGroup) {
@@ -966,12 +989,16 @@ document.addEventListener('alpine:init', () => {
     },
 
     generateFullWeek() {
+      if (this.generating) return
+      this.generating = true
+
       const range = this.weekBoundsFor(this.genWeekOffset)
       const fmt = d => d.toLocaleDateString('en-GB', { day:'2-digit', month:'short', year:'numeric' })
       const yearGroupsOrdered = Object.keys(this.slotsByDay).reduce((memo, day) => {
         this.slotsByDay[day].forEach(s => { if (!memo.includes(s.yearGroup)) memo.push(s.yearGroup) })
         return memo
       }, [])
+      const plans = []
 
       const allSessions = {}
       yearGroupsOrdered.forEach(yg => {
@@ -983,6 +1010,10 @@ document.addEventListener('alpine:init', () => {
             allSessions[yg].push({ unit: u, sessionIndex: i, label: m.label || '' })
           })
         })
+        // shuffle pool for random ordering
+        for (let i = allSessions[yg].length - 1; i > 0; i--) {
+          const j = Math.floor(Math.random() * (i + 1)); [allSessions[yg][i], allSessions[yg][j]] = [allSessions[yg][j], allSessions[yg][i]]
+        }
       })
       const counters = {}
       yearGroupsOrdered.forEach(yg => { counters[yg] = 0 })
@@ -1037,19 +1068,27 @@ document.addEventListener('alpine:init', () => {
             activities: unit.modules?.length
               ? this.buildActivitiesFromModule(unit, sessionIndex)
               : [
-                  { id: this.generateId(), phase: 'Set Induction', description: 'Engage pupils with a starter activity.', duration: 5, teacherRole: 'Facilitator', studentRole: 'Participant' },
-                  { id: this.generateId(), phase: 'Pre-lesson', description: 'Introduce key vocabulary.', duration: 5, teacherRole: 'Instructor', studentRole: 'Listener' },
-                  { id: this.generateId(), phase: 'Lesson Development', description: 'Main task related to ' + unit.title, duration: Math.max(15, this.minutesBetween(slot.startTime, slot.endTime) - 15), teacherRole: 'Facilitator', studentRole: 'Active learner' },
-                  { id: this.generateId(), phase: 'Post-lesson', description: 'Pupils share their work.', duration: 5, teacherRole: 'Moderator', studentRole: 'Presenter' },
-                  { id: this.generateId(), phase: 'Closure', description: 'Recap and exit ticket.', duration: 5, teacherRole: 'Facilitator', studentRole: 'Reflector' },
+                  { id: this.generateId(), phase: 'Set Induction', description: 'Engage pupils with a starter activity about ' + unit.title + '.', duration: 5 + Math.floor(Math.random() * 4), teacherRole: 'Facilitator', studentRole: 'Participant' },
+                  { id: this.generateId(), phase: 'Pre-lesson', description: 'Introduce and drill key vocabulary.', duration: 5 + Math.floor(Math.random() * 4), teacherRole: 'Instructor', studentRole: 'Listener' },
+                  { id: this.generateId(), phase: 'Lesson Development', description: 'Main task related to ' + unit.title, duration: Math.max(15, this.minutesBetween(slot.startTime, slot.endTime) - 15 + Math.floor(Math.random() * 6 - 3)), teacherRole: 'Facilitator', studentRole: 'Active learner' },
+                  { id: this.generateId(), phase: 'Post-lesson', description: 'Pupils present and discuss their work.', duration: 5 + Math.floor(Math.random() * 4), teacherRole: 'Moderator', studentRole: 'Presenter' },
+                  { id: this.generateId(), phase: 'Closure', description: 'Recap and exit ticket activity.', duration: 5, teacherRole: 'Facilitator', studentRole: 'Reflector' },
                 ],
-            song: unit.songs?.[0] || null,
+            song: unit.songs?.length ? unit.songs[Math.floor(Math.random() * unit.songs.length)] : null,
             reflection: '',
             _open: true,
+            _animating: true,
           }
-          this.lessonPlans = [plan, ...this.lessonPlans]
+          plans.push(plan)
         })
       })
+
+      for (let i = plans.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1)); [plans[i], plans[j]] = [plans[j], plans[i]]
+      }
+      this.lessonPlans = [...plans, ...this.lessonPlans]
+      setTimeout(() => { this.lessonPlans = this.lessonPlans.map(p => ({ ...p, _animating: false })) }, 600)
+      setTimeout(() => { this.generating = false }, 400)
     },
 
     minutesBetween(start, end) {
