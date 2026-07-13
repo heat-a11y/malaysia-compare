@@ -90,6 +90,16 @@
       </div>
     </header>
 
+    <!-- ── Donation banner ── -->
+    <div
+      x-show="showDonationBanner"
+      class="flex items-center justify-center gap-2 bg-amber-50 px-4 py-2 text-xs text-amber-800"
+    >
+      <span>☕ Support MALP — donate Bitcoin:</span>
+      <code class="select-all rounded bg-amber-100 px-2 py-0.5 font-mono text-[11px] text-amber-900">bc1q47tl79lx5ua5hecnsj42d6whgk8hjlqvlv3jh7</code>
+      <button @click="dismissDonation()" class="ml-1 shrink-0 rounded p-0.5 text-amber-500 hover:text-amber-700">&times;</button>
+    </div>
+
     <!-- ── Page content ── -->
     <main class="flex-1 overflow-y-auto p-4 md:p-6 lg:p-8">
 
@@ -1151,6 +1161,14 @@ document.addEventListener('alpine:init', () => {
       const d = document.createElement('div')
       d.textContent = str
       return d.innerHTML
+    },
+
+    // ── Donation banner ──
+    showDonationBanner: !localStorage.getItem('malp_donation_dismissed'),
+
+    dismissDonation() {
+      this.showDonationBanner = false
+      localStorage.setItem('malp_donation_dismissed', '1')
     },
 
     exportAllPlans() {
