@@ -331,6 +331,9 @@
             <button @click="insertReflectionsAll()" x-show="lessonPlans.length" class="inline-flex items-center gap-1.5 rounded-lg border bg-amber-50 px-3 py-2 text-xs font-medium text-amber-700 shadow-sm transition-colors hover:bg-amber-100">
               <span>&#x1F4AD;</span> Insert All Reflections
             </button>
+            <button @click="generateRandomTPAllPlans()" x-show="lessonPlans.length" class="inline-flex items-center gap-1.5 rounded-lg border bg-amber-50 px-3 py-2 text-xs font-medium text-amber-700 shadow-sm transition-colors hover:bg-amber-100">
+              <span>&#x1F3B2;</span> Random TP All
+            </button>
             <button @click="attachRekodAll()" x-show="lessonPlans.length" class="inline-flex items-center gap-1.5 rounded-lg border bg-indigo-50 px-3 py-2 text-xs font-medium text-indigo-700 shadow-sm transition-colors hover:bg-indigo-100">
               <span>&#x1F4CA;</span> Attach Rekod Transit
             </button>
@@ -516,7 +519,7 @@
                   <div x-show="plan._rekodOpen" x-collapse class="overflow-x-auto rounded-lg border bg-white text-xs">
                     <div class="flex items-center justify-end gap-1 border-b bg-slate-50 px-2 py-1">
                       <span class="mr-auto text-[10px] text-slate-400" x-text="plan.rekodTransit.students.length + ' pupils'"></span>
-                      <button @click.stop="resetRekodPlanToTOV(plan)" class="rounded px-1.5 py-0.5 text-[10px] font-medium text-amber-700 hover:bg-amber-50">&#x1F3AF; TP</button>
+                      <button @click.stop="generateRandomTPPlan(plan)" class="rounded px-1.5 py-0.5 text-[10px] font-medium text-amber-700 hover:bg-amber-50">&#x1F3B2; TP</button>
                       <button @click.stop="addRekodStudentToPlan(plan)" class="rounded px-1.5 py-0.5 text-[10px] font-medium text-indigo-600 hover:bg-indigo-50">+ Add</button>
                     </div>
                     <table class="w-full min-w-[400px]">
@@ -817,14 +820,19 @@
                 <p class="text-xs text-slate-500">DSKP-aligned performance level records for each year group. Attach to lesson plans via the Generate tab.</p>
               </div>
             </div>
-            <button @click="attachRekodAll()" class="inline-flex items-center gap-1.5 rounded-lg bg-indigo-600 px-4 py-2 text-xs font-semibold text-white shadow-sm transition-colors hover:bg-indigo-700">
-              <span>&#x26A1;</span> Attach to All Plans
-            </button>
+            <div class="flex gap-2">
+              <button @click="generateRandomTPAll()" class="inline-flex items-center gap-1.5 rounded-lg border bg-amber-50 px-3 py-2 text-xs font-medium text-amber-700 shadow-sm transition-colors hover:bg-amber-100">
+                <span>&#x1F3B2;</span> Generate Random TP All
+              </button>
+              <button @click="attachRekodAll()" class="inline-flex items-center gap-1.5 rounded-lg bg-indigo-600 px-4 py-2 text-xs font-semibold text-white shadow-sm transition-colors hover:bg-indigo-700">
+                <span>&#x26A1;</span> Attach to All Plans
+              </button>
+            </div>
           </div>
         </div>
 
         <!-- Rekod Transit table (editable) -->
-         <div x-show="rekodForYear(reflectionYear).students.length" class="mb-6 overflow-x-auto rounded-xl border bg-white shadow-sm">
+        <div x-show="rekodForYear(reflectionYear).students.length" class="mb-6 overflow-x-auto rounded-xl border bg-white shadow-sm">
           <div class="flex items-center justify-between border-b bg-slate-50 px-3 py-2">
             <p class="text-xs font-medium text-slate-500">
               <span x-text="rekodForYear(reflectionYear).students.length"></span> students
@@ -833,8 +841,8 @@
               <button @click="addRekodStudent(reflectionYear)" class="inline-flex items-center gap-1 rounded-lg border bg-white px-2.5 py-1.5 text-xs font-medium text-indigo-600 shadow-sm transition-colors hover:bg-indigo-50">
                 <span class="text-base leading-none">+</span> Add Student
               </button>
-              <button @click="resetRekodToTOV(reflectionYear)" class="inline-flex items-center gap-1 rounded-lg border bg-amber-50 px-2.5 py-1.5 text-xs font-medium text-amber-700 shadow-sm transition-colors hover:bg-amber-100">
-                <span>&#x1F3AF;</span> Generate TP
+              <button @click="generateRandomTPForYear(reflectionYear)" class="inline-flex items-center gap-1 rounded-lg border bg-amber-50 px-2.5 py-1.5 text-xs font-medium text-amber-700 shadow-sm transition-colors hover:bg-amber-100">
+                <span>&#x1F3B2;</span> Random TP
               </button>
               <button @click="saveRekodData()" class="inline-flex items-center gap-1 rounded-lg bg-indigo-600 px-3 py-1.5 text-xs font-semibold text-white shadow-sm transition-colors hover:bg-indigo-700">
                 <span>&#x1F4BE;</span> Save Changes
@@ -1506,35 +1514,44 @@ document.addEventListener('alpine:init', () => {
       this.persist()
     },
 
-    resetRekodToTOV(year) {
-      const original = REKOD_TRANSIT[year]
-      const current = this.rekodTransitData && this.rekodTransitData[year]
-      if (!original || !current) return
-      if (!confirm(`Reset all TP values for ${year} to original TOV from the PDF? This will overwrite current TP values but keep student names and any new rows.`)) return
-      original.students.forEach((origStudent, i) => {
-        if (current.students[i]) {
-          current.students[i].listening = origStudent.listening
-          current.students[i].speaking = origStudent.speaking
-          current.students[i].reading = origStudent.reading
-          current.students[i].writing = origStudent.writing
-          current.students[i].overall = origStudent.overall
-          current.students[i].intervention = origStudent.intervention
-        }
+    randomTP() {
+      return Math.floor(Math.random() * 6) + 1
+    },
+
+    generateRandomTPForYear(year) {
+      const data = this.rekodTransitData && this.rekodTransitData[year]
+      if (!data) return
+      data.students.forEach(s => {
+        s.listening = this.randomTP()
+        s.speaking = this.randomTP()
+        s.reading = this.randomTP()
+        s.writing = this.randomTP()
+        s.overall = this.randomTP()
       })
     },
 
-    resetRekodPlanToTOV(plan) {
-      const original = REKOD_TRANSIT[plan.yearGroup]
-      if (!original || !plan.rekodTransit) return
-      if (!confirm(`Reset TP values to original TOV for ${plan.yearGroup}?`)) return
-      original.students.forEach((origStudent, i) => {
-        if (plan.rekodTransit.students[i]) {
-          plan.rekodTransit.students[i].listening = origStudent.listening
-          plan.rekodTransit.students[i].speaking = origStudent.speaking
-          plan.rekodTransit.students[i].reading = origStudent.reading
-          plan.rekodTransit.students[i].writing = origStudent.writing
-          plan.rekodTransit.students[i].overall = origStudent.overall
-          plan.rekodTransit.students[i].intervention = origStudent.intervention
+    generateRandomTPAll() {
+      if (!confirm('Generate random TP values for all students across all year groups? Current TP values will be overwritten.')) return
+      Object.keys(REKOD_TRANSIT).forEach(year => {
+        this.generateRandomTPForYear(year)
+      })
+    },
+
+    generateRandomTPPlan(plan) {
+      if (!plan.rekodTransit || !plan.rekodTransit.students) return
+      plan.rekodTransit.students.forEach(s => {
+        s.listening = this.randomTP()
+        s.speaking = this.randomTP()
+        s.reading = this.randomTP()
+        s.writing = this.randomTP()
+        s.overall = this.randomTP()
+      })
+    },
+
+    generateRandomTPAllPlans() {
+      this.lessonPlans.forEach(plan => {
+        if (plan.rekodTransit && plan.rekodTransit.students) {
+          this.generateRandomTPPlan(plan)
         }
       })
     },
