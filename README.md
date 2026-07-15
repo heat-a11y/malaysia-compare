@@ -1,42 +1,54 @@
-# MALP — Malaysian Lesson Planner
+# malaysia-compare — Bossku punya comparison app
 
-A fully client-side, zero-dependency web app for Malaysian primary school English teachers to plan, organise, and generate lesson plans — deployable on GitHub Pages in 60 seconds.
+Interactive, side-by-side comparisons of everything Malaysian — from insurance and careers to government initiatives and Bitcoin. Built with ❤️ and a side of Teh Tarik.
 
-## Features
+![demo](https://img.shields.io/badge/status-live-brightgreen)
+![platform](https://img.shields.io/badge/platform-web%20%7C%20android-blue)
 
-- **My Timetable** — Interactive weekly grid (Mon–Fri, Periods 1–8). Click any cell to add/edit a class slot. Pre-populated with a sample timetable for Years 1–6.
-- **Generate Lesson Plans** — Select a week and a curriculum unit, then click one button. The engine reads your active timetable, cross-references the Curriculum Database, splits lessons into Part 1 / Part 2, and renders beautiful, expandable preview cards.
-- **Curriculum Database** — Browse DSKP-aligned content standards, learning standards, learning objectives, theme songs (with guitar chords), and full lesson modules for Years 1–6.
-- **Export & Print** — Copy any lesson plan to your clipboard as clean text, or print / save to PDF with a professional, print-optimised layout. Editable Teacher's Reflection fields on every plan card.
-- **100 % client-side** — No server, no API, no build step. All data is persisted to `localStorage`.
+## 📱 Get the App
 
-## Textbook Mapping
+- **Web**: Open `index.html` in any browser
+- **Android**: Download the [latest APK](https://github.com/heat-a11y/malaysia-compare/releases)
 
-| Year | Textbook |
-|------|----------|
-| Year 1 | Superminds 1 |
-| Year 2 | Superminds 2 |
-| Year 3 | Get Smart 3 |
-| Year 4 | Get Smart Plus 4 |
-| Year 5 | English Plus 1 |
-| Year 6 | Academy Stars |
+## 🧩 Modules
 
-## Deploy to GitHub Pages
+| Module | What it does |
+|--------|-------------|
+| 🛡️ **PERKESO vs Private Insurance** | Pros/Cons toggle + interactive "Which One Do I Need?" calculator |
+| 🏛️ **Gov vs Private Sector** | "Choose Your Character" career showdown with animated stat bars |
+| 📋 **Government Initiatives** | Report card for My50, JENDELA, PADU, etc. with Rakyat Rating voting |
+| ₿ **Fiat vs Bitcoin** | Financial dashboard + inflation calculator (10-year Nasi Lemak price projection) |
 
-1. Push this repository to GitHub.
-2. Go to **Settings → Pages**.
-3. Under **Branch**, select `main` and `/ (root)`, then click **Save**.
-4. Wait ~30 seconds, then visit `https://<your-username>.github.io/<repo-name>/`.
+## 🎨 Features
 
-No build commands, no configuration files, no frameworks.
+- **Light/Dark mode** — Siang / Malam toggle, persisted in localStorage
+- **Teh Tarik FAB** — Click the coffee button for a virtual pour + random Malaysian fact
+- **Manglish quotes** — Kopitiam chatter cycling in the sidebar
+- **Scroll-triggered animations** — Cards reveal as you scroll
+- **Fully responsive** — Works on mobile, tablet, and desktop
 
-## Tech Stack
+## 🛠️ Tech Stack
 
-- Single `index.html` file
-- [Tailwind CSS](https://tailwindcss.com/) via CDN
-- [Alpine.js](https://alpinejs.dev/) v3 with collapse plugin
-- All data stored in browser `localStorage`
+- **HTML + Tailwind CSS** (via CDN) — Styling
+- **Lucide Icons** — Iconography
+- **Vanilla JavaScript** — All interactivity, no frameworks
+- **Android WebView** — APK wrapper (Java + Gradle)
 
-## License
+## 🐛 Local Development
 
-MIT
+Just open `index.html` in a browser — no build step needed.
+
+### Android Build
+
+```bash
+cd android
+export JAVA_HOME=/path/to/jdk-17
+export ANDROID_HOME=/path/to/android-sdk
+./gradlew assembleDebug
+```
+
+APK output: `android/app/build/outputs/apk/debug/app-debug.apk`
+
+## 📄 License
+
+MIT — Use freely, Bossku. Jangan marah kalau ada silap.
